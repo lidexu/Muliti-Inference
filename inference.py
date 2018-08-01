@@ -10,6 +10,7 @@ import caffe
 from google.protobuf import text_format
 from caffe.proto import caffe_pb2
 import time
+# import yaml
 
 from process import Producer_Of_ImageNameQueue, Producer_Of_ImageDataQueue_And_consumer_Of_imageNameQueue, Consumer_Of_ImageDataQueue_Inference
 
@@ -29,19 +30,20 @@ def initModels(modelFile=None, gpuId=None, inputFileName=None, beginIndex=None):
     """
     model_list = []
     with open(modelFile, 'r') as m_f:
-        modelParams = json.loads(m_f)
+        line = m_f.readlines()
+        modelParams = json.loads(line)
     
     saveFileName_model1 = getFilePath_FileNameNotIncludePostfix(
         fileName=inputFileName)[-1]+'_'+str(beginIndex)+"-result.json"
     saveFileName_model2 = getFilePath_FileNameNotIncludePostfix(
         fileName=inputFileName)[-1]+'_'+str(beginIndex)+"-resultModel2.json"
     
-    model_1 = modelParams['model1']
+    model_1 = modelParams[0]
     model_1['gpuId'] = gpuId
     model_1['saveResultFileName'] = saveFileName_model1
     model_1['imageSize'] = 320
     
-    model_2 = modelParams['model_2']
+    model_2 = modelParams[1]
     model_2['gpuId'] = gpuId
     model_2['saveResultFileName'] = saveFileName_model2
     model_2['imageSize'] = 320
@@ -57,7 +59,7 @@ def initModels(modelFile=None, gpuId=None, inputFileName=None, beginIndex=None):
 def mainProcessFun(param_dict_JsonStr=None):
     param_dict = json.loads(param_dict_JsonStr)
     countOfgetUrlDataThread = param_dict['imageDataProducerCount']
-    modelList = initModels(modelFile=param_dict['modeFile'], gpuId=param_dict['gpuId'],
+    modelList = initModels(modelFile=param_dict['modelFile'], gpuId=param_dict['gpuId'],
                            inputFileName=param_dict['inputFileName'], beginIndex=param_dict['beginIndex'])
 
     print("main process begin running")
