@@ -121,7 +121,7 @@ def main():
     param_dict['imageDataProducerCount'] = 2
     param_dict['urlFlag'] = True
     param_dict_JsonStr = json.dumps(param_dict)
-    print(param_dict)
+    print(param_dict_JsonStr)
     mainProcessFun(param_dict_JsonStr=param_dict_JsonStr)
     pass
 

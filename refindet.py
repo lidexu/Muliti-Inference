@@ -12,8 +12,11 @@ import time
 class Model(object):
     def __init__(self, paramDict):
         self.paramDict=paramDict
-        self.net = None
+        # self.net = None
         self.label_list = None
+        # self.init_Net()
+        # self.init_Model()
+        
     
     def init_Net(self):
         self.saveFile = open(self.paramDict['saveResultFileName'], 'w')

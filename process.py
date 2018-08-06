@@ -144,6 +144,7 @@ class Consumer_Of_ImageDataQueue_Inference(multiprocessing.Process):
     def run(self):
         print("LOGINFO---%s---Thread %s begin running" %
               (self.getTimeFlag(), self.threadName))
+            
         endGetImageDataThreadCount = 0
         time_out_count = 0
         while True:
