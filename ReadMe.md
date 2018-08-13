@@ -1,7 +1,9 @@
 文件说明：
+=======================
+##文件说明
 process.py: 多线程读写推理
 refindet.py: refindet模型
-inference.py: 多模型推理类
+inference.py: 多模型推理
 inference传参说明：
 inputFileName：图片url文件
 beginIndex：起始url的index
